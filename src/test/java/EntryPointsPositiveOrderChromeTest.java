@@ -1,28 +1,21 @@
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.extension.RegisterExtension;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import page.object.OrderPage;
+import pageobject.OrderPage;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static page.object.MainPage.*;
-import static page.object.OrderPage.*;
+import static pageobject.OrderPage.*;
 
 public class EntryPointsPositiveOrderChromeTest {
-    private WebDriver driver;
-    @BeforeEach
-    public void setUp() {
-        driver = new ChromeDriver();
-        driver.get(MAIN_PAGE_URL);
-    }
+    @RegisterExtension
+    private DriverExtension extension = new DriverExtension();
+
     @ParameterizedTest
     @MethodSource("orderParam")
     void firstEntryPointPositiveOrder(String username, String surname, String address, String metro, String telephone, String date, String comment) {
-        OrderPage orderPage = new OrderPage(driver);
+        OrderPage orderPage = new OrderPage(extension.getDriver());
         orderPage.clickSignInTopButton();
         orderPage.setUsername(username);
         orderPage.setSurname(surname);
@@ -39,7 +32,7 @@ public class EntryPointsPositiveOrderChromeTest {
         orderPage.setComment(comment);
         orderPage.clickOrderButton();
         orderPage.clickYesButton();
-        String getRent = driver.findElement(orderIsProcessed).getText();
+        String getRent = extension.getDriver().findElement(orderIsProcessed).getText();
         assertEquals("Заказ оформлен\n" +
                 "Номер заказа: .  Запишите его:\n" +
                 "пригодится, чтобы отслеживать статус", getRent);
@@ -53,7 +46,7 @@ public class EntryPointsPositiveOrderChromeTest {
     @ParameterizedTest
     @MethodSource("orderParam")
     void secondEntryPointPositiveOrder(String username, String surname, String address, String metro, String telephone, String date, String comment) {
-        OrderPage orderPage = new OrderPage(driver);
+        OrderPage orderPage = new OrderPage(extension.getDriver());
         orderPage.clickAppCookieButton();
         orderPage.clickSignInButtonBottom();
         orderPage.setUsername(username);
@@ -71,15 +64,9 @@ public class EntryPointsPositiveOrderChromeTest {
         orderPage.setComment(comment);
         orderPage.clickOrderButton();
         orderPage.clickYesButton();
-        String getRent = driver.findElement(orderIsProcessed).getText();
+        String getRent = extension.getDriver().findElement(orderIsProcessed).getText();
         assertEquals("Заказ оформлен\n" +
                 "Номер заказа: .  Запишите его:\n" +
                 "пригодится, чтобы отслеживать статус", getRent);
-    }
-    @AfterEach
-    public void tearDown() {
-        if (driver != null) {
-            driver.quit(); // Закрытие браузера
-        }
     }
 }

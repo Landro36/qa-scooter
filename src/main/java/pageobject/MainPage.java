@@ -1,4 +1,4 @@
-package page.object;
+package pageobject;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -34,6 +34,54 @@ public class MainPage {
 
     //локатор кнопки "Go!"
     static By goButton = By.xpath(".//button[text()='Go!']");
+
+    //локатор первого вопроса
+    public static String firstQuestion = "//*[@id='accordion__heading-0']";
+
+    //локатор второго вопроса
+    public static String secondQuestion = "//*[@id='accordion__heading-1']";
+
+    //локатор третьего вопроса
+    public static String thirdQuestion = "//*[@id='accordion__heading-2']";
+
+    //локатор четвертого вопроса
+    public static String fourthQuestion = "//*[@id='accordion__heading-3']";
+
+    //локатор пятого вопроса
+    public static String fifthQuestion = "//*[@id='accordion__heading-4']";
+
+    //локатор шестого вопроса
+    public static String sixthQuestion = "//*[@id='accordion__heading-5']";
+
+    //локатор седьмого вопроса
+    public static String seventhQuestion = "//*[@id='accordion__heading-6']";
+
+    //локатор восьмого вопроса
+    public static String eighthQuestion = "//*[@id='accordion__heading-7']";
+
+    //локатор первого ответа
+    public static String firstAnswer = "//*[@id='accordion__panel-0']";
+
+    //локатор второго ответа
+    public static String secondAnswer = "//*[@id='accordion__panel-1']";
+
+    //локатор третьего ответа
+    public static String thirdAnswer = "//*[@id='accordion__panel-2']";
+
+    //локатор четвертого ответа
+    public static String fourthAnswer = "//*[@id='accordion__panel-3']";
+
+    //локатор пятого ответа
+    public static String fifthAnswer = "//*[@id='accordion__panel-4']";
+
+    //локатор шестого ответа
+    public static String sixthAnswer = "//*[@id='accordion__panel-5']";
+
+    //локатор седьмого ответа
+    public static String seventhAnswer = "//*[@id='accordion__panel-6']";
+
+    //локатор восьмого ответа
+    public static String eighthAnswer = "//*[@id='accordion__panel-7']";
 
     //метод клика по кнопке «Заказать» сверху страницы
     public void clickSignInTopButton() {
